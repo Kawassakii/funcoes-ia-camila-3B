@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Real-Time Q&A - Fórmula 1</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js para o ecossistema 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <!-- Canvas 3D para circuito, carros F1, zebras e luzes -->
+    <canvas id="f1-canvas"></canvas>
+
+    <!-- Camada escura de sobreposição -->
+    <div class="overlay"></div>
+
+    <!-- Modal Principal -->
+    <main class="caixa-principal">
+        
+        <!-- Cabeçalho -->
+        <header class="modal-header">
+            <div class="logo-area">
+                <i class="fa-solid fa-trophy logo-icon"></i>
+                <h1>F1 <span>LIVE SEARCH</span></h1>
+            </div>
+            <p class="subtitulo">Pesquisas e Notícias de F1 em tempo real na Web com Leitor de Voz IA.</p>
+        </header>
+
+        <!-- Formulário de Pergunta -->
+        <section class="caixa-perguntas">
+            <div class="input-group">
+                <input type="text" id="campo-pergunta" placeholder="Ex: Quem venceu a última corrida? Qual a situação de Hamilton?" autocomplete="off" />
+                <button id="btn-perguntar">
+                    <i class="fa-solid fa-magnifying-glass"></i> Pesquisar
+                </button>
+            </div>
+
+            <!-- Sugestões Populares -->
+            <div class="sugestoes">
+                <span>Sugestões em alta:</span>
+                <button class="chip-sugestao" data-query="Fórmula 1 2026 regulamento de motores">Motores 2026</button>
+                <button class="chip-sugestao" data-query="Últimas notícias sobre a Ferrari na F1">Notícias Ferrari</button>
+                <button class="chip-sugestao" data-query="Quem é o atual campeão mundial de Fórmula 1?">Campeão Atual</button>
+                <button class="chip-sugestao" data-query="Próxima corrida do calendário da Fórmula 1">Próximo GP</button>
+            </div>
+        </section>
+
+        <!-- Indicação de Carregamento da Busca na Web -->
+        <div id="loader" class="loader-container hidden">
+            <div class="f1-car-spinner">
+                <i class="fa-solid fa-gauge-high fa-spin"></i>
+            </div>
+            <p>Buscando notícias e informações em tempo real na internet...</p>
+        </div>
+
+        <!-- Exibição dos Resultados da Busca -->
+        <section class="caixa-resultado hidden" id="caixa-resultado">
+            <div class="card-resposta">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-globe"></i> Resultado Web em Tempo Real</h2>
+                    <div class="controles-voz">
+                        <button id="btn-voz" title="Ouvir notícia por Voz IA">
+                            <i class="fa-solid fa-volume-high"></i> Ouvir Voz IA
+                        </button>
+                        <button id="btn-parar-voz" class="hidden" title="Parar Leitura">
+                            <i class="fa-solid fa-circle-stop"></i> Parar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Resposta retornada da Web -->
+                <div class="texto-resultado" id="texto-resultado"></div>
+
+                <!-- Link direto para a notícia / fonte consultada -->
+                <div class="fonte-noticia" id="area-fonte">
+                    <h4><i class="fa-solid fa-newspaper"></i> Notícia Original / Fonte:</h4>
+                    <a href="#" id="link-noticia" target="_blank" rel="noopener noreferrer">
+                        <span id="titulo-noticia">Ler notícia completa na fonte</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
